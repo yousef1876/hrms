@@ -1,0 +1,30 @@
+http:
+        mappers: 
+            jsonPrettyPrint: true
+        
+logging:
+        file: /tmp/spring-boot-mvc.log
+endpoints:
+        shutdown.enabled: true
+
+server:
+        port: 9090
+        contextPath: /pizza
+        session:
+                timeout: 10000
+management:
+        port: 9091
+        address: 127.0.0.1
+        context-path: /manage
+        security:
+              enabled: true
+              roles: ADMIN
+        info:
+          git:
+            enabled: true
+            mode: full
+
+spring:
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
