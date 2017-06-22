@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.application.hrms.employee.model.Employee;
 import com.application.hrms.employee.security.model.EmployeeUser;
 import com.application.hrms.organization.model.Department;
 
@@ -42,8 +41,9 @@ public class Project {
 	@Column(name = "created_date" , nullable = false) 
 	private Date createdDate;
 	
-	@Column(name = "created_by" , nullable = false)
-	private EmployeeUser user;
+	@ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+	@JoinColumn(name = "created_by" , nullable = false)
+	private EmployeeUser users;
 	
 	@ManyToOne(cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
 	@JoinColumn(name = "manager_id" , nullable = false)
@@ -65,6 +65,12 @@ public class Project {
 	private List<ProjectRequirmentGathering> projectReqs;
 	
 	
+	
+	
+	public EmployeeUser getManagers() {
+		return managers;
+	}
+
 	public List<ProjectPhases> getProjects() {
 		return projects;
 	}
@@ -113,19 +119,14 @@ public class Project {
 		this.createdDate = createdDate;
 	}
 
-	public EmployeeUser getUser() {
-		return user;
-	}
-
-	public void setUser(EmployeeUser user) {
-		this.user = user;
-	}
-
-	public Employee getManagers() {
-		return managers;
-	}
-
 	
+	public EmployeeUser getUsers() {
+		return users;
+	}
+
+	public void setUsers(EmployeeUser users) {
+		this.users = users;
+	}
 
 	public void setManagers(EmployeeUser managers) {
 		this.managers = managers;

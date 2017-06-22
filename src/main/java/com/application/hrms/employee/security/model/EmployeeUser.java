@@ -2,9 +2,14 @@ package com.application.hrms.employee.security.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.application.hrms.employee.model.Employee;
@@ -19,6 +24,7 @@ import com.application.hrms.employee.model.Sales;
 import com.application.hrms.management.model.OrganizationDepartmentManagment;
 import com.application.hrms.management.model.OrganizationManagment;
 import com.application.hrms.management.model.TeamManagement;
+import com.application.hrms.project.model.Project;
 import com.application.hrms.project.model.ProjectForum;
 import com.application.hrms.project.model.ProjectForumSubjectIssues;
 import com.application.hrms.project.model.ProjectPhases;
@@ -26,7 +32,16 @@ import com.application.hrms.project.model.ProjectTasks;
 
 @Entity
 @Table(name = "employee_users")
-public class EmployeeUser extends Employee {
+public class EmployeeUser  {
+	
+	@Id
+	@GeneratedValue( strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+	
+	@ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+	@JoinColumn(name = "employee_id" , nullable = false)
+	private Employee employees;
 	
 	@Column(name = "username" , nullable = false)
 	private String username;
@@ -97,6 +112,9 @@ public class EmployeeUser extends Employee {
 	@OneToMany(fetch = FetchType.LAZY , mappedBy = "createdBy")
 	private List<ProjectPhases> projectPhasedCreatedBy;
 	
+	@OneToMany(fetch = FetchType.LAZY , mappedBy = "users")
+	private List<Project> projectCreatedBy;
+	
 	@OneToMany(fetch = FetchType.LAZY , mappedBy = "managers")
 	private List<ProjectPhases> projectPhasedManager;
 	
@@ -115,6 +133,30 @@ public class EmployeeUser extends Employee {
 	
 	
 	
+	public List<Project> getProjectCreatedBy() {
+		return projectCreatedBy;
+	}
+
+	public void setProjectCreatedBy(List<Project> projectCreatedBy) {
+		this.projectCreatedBy = projectCreatedBy;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Employee getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Employee employees) {
+		this.employees = employees;
+	}
+
 	public List<EmployeeAttendance> getAttendancesCreatedBy() {
 		return attendancesCreatedBy;
 	}

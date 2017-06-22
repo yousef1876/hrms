@@ -12,6 +12,6 @@ import com.application.hrms.guest.security.model.GuestUser;
 @RepositoryRestResource(collectionResourceRel = "guest_sec_users", path = "guest_sec_users")
 public interface GuestAuthRepo extends PagingAndSortingRepository<GuestAuth, Long> {
 
-	List<GuestAuth> findByEmployees(@Param("name") GuestUser name);
+	List<GuestAuth> findByGuestUsers(@Param("guest") GuestUser guest);
 
 }

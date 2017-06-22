@@ -2,17 +2,32 @@ package com.application.hrms.guest.security.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.application.hrms.employee.model.Employee;
+import com.application.hrms.person.model.Person;
 
 @Entity
 @Table(name = "guest_users")
-public class GuestUser extends Employee {
+public class GuestUser {
+	
+	
+	@Id
+	@GeneratedValue( strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+    private Long id;
+	
+	@ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+	@JoinColumn(name = "person_id" , nullable = false)
+	private Person persons;
 	
 	@Column(name = "username" , nullable = false)
 	private String username;
@@ -29,9 +44,28 @@ public class GuestUser extends Employee {
 	@Column(name = "description" , nullable = false)
 	private String description;
 
-	@OneToMany(fetch = FetchType.LAZY , mappedBy = "employees")
+	@OneToMany(fetch = FetchType.LAZY , mappedBy = "guestUsers")
 	private List<GuestAuth> auths;
 	
+	
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Person getPersons() {
+		return persons;
+	}
+
+	public void setPersons(Person persons) {
+		this.persons = persons;
+	}
+
 	public List<GuestAuth> getAuths() {
 		return auths;
 	}

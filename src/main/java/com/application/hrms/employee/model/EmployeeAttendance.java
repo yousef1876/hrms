@@ -41,7 +41,7 @@ public class EmployeeAttendance {
 	@Column(name = "to_date" , nullable = false)
 	private Date toDate;
 	
-	@Column(name = "notes" , nullable = true)
+	@Column(name = "description" , nullable = true)
 	private String notes;
 	
 	@Column(name = "notes" , nullable = true)

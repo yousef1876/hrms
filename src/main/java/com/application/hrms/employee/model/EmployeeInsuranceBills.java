@@ -43,7 +43,7 @@ public class EmployeeInsuranceBills  {
 	private String currency;
 	
 	@ManyToOne(cascade = javax.persistence.CascadeType.ALL)
-	@JoinColumn(name = "employee_id" , nullable = false)
+	@JoinColumn(name = "created_employee_id" , nullable = false)
 	private EmployeeUser createdBy;
 	
 	@ManyToOne(cascade = javax.persistence.CascadeType.ALL)

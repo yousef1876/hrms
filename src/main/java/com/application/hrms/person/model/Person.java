@@ -13,6 +13,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.application.hrms.guest.security.model.GuestUser;
+
 @Entity
 @Table(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -68,9 +70,18 @@ public class Person {
 	@OneToMany(fetch = FetchType.LAZY , mappedBy = "persons")
 	private List<PersonProfile> personProfile;
 	
+	@OneToMany(fetch = FetchType.LAZY , mappedBy = "persons")
+	private List<GuestUser> personUsers;
 	
 	
-	
+	public List<GuestUser> getPersonUsers() {
+		return personUsers;
+	}
+
+	public void setPersonUsers(List<GuestUser> personUsers) {
+		this.personUsers = personUsers;
+	}
+
 	public List<PersonEducation> getPersonEducation() {
 		return personEducation;
 	}

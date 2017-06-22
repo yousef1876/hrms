@@ -13,8 +13,6 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.application.hrms.config.OAuth2ServerConfiguration;
-import com.application.hrms.config.SparklrUserApprovalHandler;
 import com.application.hrms.config.SwaggerConfiguration;
 import com.application.hrms.config.WebConfigurer;
 import com.application.hrms.config.WebMvcConfig;
@@ -65,8 +63,8 @@ public class WebAppInitializer implements WebApplicationInitializer {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		context.register(RootConfig.class);
 		
-		context.register(OAuth2ServerConfiguration.class);
-		context.register(SparklrUserApprovalHandler.class);
+		
+		
 		context.register(SwaggerConfiguration.class);
 		context.register(WebConfigurer.class);
 		context.register(WebMvcConfig.class);
