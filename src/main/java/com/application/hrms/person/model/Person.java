@@ -57,6 +57,15 @@ public class Person {
 	
 	@Column(name = "passport_expire_date" , nullable = true)
 	private Date   passportExpireDate;
+	
+	/*
+	One to Many relatiom with Person Entity
+	1.Education
+	2.Experience
+	3.Attachment
+	4.Profile
+	5.Users
+	*/
 
 	@OneToMany(fetch = FetchType.LAZY , mappedBy = "persons")
 	private List<PersonEducation> personEducation;
